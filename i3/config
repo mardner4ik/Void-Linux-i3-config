@@ -1,0 +1,73 @@
+set $mod Mod4
+font pango:DejaVu Sans Mono 12
+default_border pixel 2
+default_floating_border pixel 2
+
+# Фірмові кольори Void
+set $void_green       #478061
+set $void_charcoal    #1b1d1f
+set $void_gray        #282c30
+set $void_light_gray  #a9b1bc
+set $void_white       #ffffff
+
+client.focused          $void_green      $void_green      $void_white      $void_green     $void_green
+client.focused_inactive $void_gray       $void_charcoal   $void_light_gray $void_gray      $void_gray
+client.unfocused        $void_charcoal   $void_charcoal   $void_light_gray $void_charcoal  $void_charcoal
+
+# Автозапуск укр. розкладки (Alt + Shift)
+exec --no-startup-id setxkbmap -layout "us,ua" -option "grp:alt_shift_toggle"
+
+# Надійна панель зверху з акуратним масштабом 18
+bar {
+    status_command i3status
+    position top
+    font pango:DejaVu Sans Mono Bold 13
+
+    colors {
+        background $void_charcoal
+        statusline $void_white
+        separator  $void_charcoal
+        focused_workspace      $void_green      $void_green      $void_white
+        active_workspace       $void_gray       $void_gray       $void_white
+        inactive_workspace     $void_charcoal   $void_charcoal   $void_light_gray
+    }
+}
+
+# Гарячі клавіші
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+q kill
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+Shift+1 move container to workspace number 3
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec i3-msg exit
+bindsym $mod+d exec rofi -show drun
+
+# Скріншот усього екрана на кнопку Print Screen (зберігає у папку Pictures)
+bindsym Print exec --no-startup-id maim ~/Pictures/screenshot-$(date +%F_%T).png
+
+# Скріншот виділеної мишкою області за натисканням Win + Print Screen
+bindsym $mod+Print exec --no-startup-id maim -s ~/Pictures/screenshot-$(date +%F_%T).png
+
+# Знімок екрана відразу в буфер обміну (Ctrl + Print Screen) — щоб просто натиснути Ctrl+V у месенджері
+bindsym ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+
+# Знімок виділеної мишкою області відразу в буфер обміну (Win + Shift + S) — як на Windows
+bindsym $mod+Shift+s exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
+
+# Збільшення гучності на 5% (карта 0)
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 sset Master 5%+
+
+# Зменшення гучності на 5% (карта 0)
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 sset Master 5%-
+
+# Повне вимкнення/увімкнення звуку (Mute)
+bindsym XF86AudioMute exec --no-startup-id amixer -c 0 sset Master toggle
+
+
+exec --no-startup-id pulseaudio --start
+
