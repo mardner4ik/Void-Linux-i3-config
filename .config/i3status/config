@@ -1,0 +1,33 @@
+general {
+        colors = true
+        interval = 1
+        color_good  = "#a9d5b6"
+        color_degraded = "#e5c07b"
+        color_bad = "#e06c75"
+}
+
+# Bar kept deliberately minimal: just the battery (if one exists) and the clock.
+order += "battery all"
+order += "tztime local"
+
+# Shows charge for any battery found (BAT0, BAT1...).
+# On desktops without a battery, this block simply doesn't show up.
+battery all {
+        format = "%status%percentage"
+        format_down = ""
+        status_chr = "⚡ "
+        status_bat = ""
+        status_full = ""
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 15
+        threshold_type = "percentage"
+        integer_battery_capacity = true
+        # Yellow + lightning bolt only while actually charging; discharging
+        # or fully charged (unplugged icon gone) just uses the bar's normal
+        # white text — color_bad below 15% still overrides both.
+        color_good = "#e5c07b"
+}
+
+tztime local {
+        format = "🕒 %H:%M"
+}

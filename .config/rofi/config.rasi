@@ -1,0 +1,115 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: "Apps";
+    display-run: "Run";
+    display-window: "Windows";
+    drun-display-format: "{name}";
+    font: "DejaVu Sans Mono 11";
+    terminal: "alacritty";
+}
+
+* {
+    void-green:    #478061;
+    void-green-lt: #5c9e7a;
+    void-charcoal: #1b1d1f;
+    void-gray:     #282c30;
+    void-light:    #a9b1bc;
+    void-white:    #ffffff;
+
+    background-color: transparent;
+    text-color: @void-white;
+}
+
+window {
+    background-color: @void-charcoal;
+    border: 2px;
+    border-color: @void-green;
+    border-radius: 8px;
+    width: 40%;
+    padding: 12px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 10px;
+    background-color: transparent;
+}
+
+inputbar {
+    background-color: @void-gray;
+    border-radius: 6px;
+    padding: 10px 14px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @void-green-lt;
+    padding: 0 8px 0 0;
+}
+
+entry {
+    text-color: @void-white;
+    placeholder: "Search...";
+    placeholder-color: @void-light;
+}
+
+listview {
+    lines: 8;
+    scrollbar: false;
+    spacing: 4px;
+    padding: 6px 0 0 0;
+}
+
+element {
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+/* Every state is spelled out below on purpose — if a state is left
+   undefined, rofi silently falls back to its built-in default theme
+   for that state, which is where the off-palette beige highlight on
+   hover was coming from. */
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @void-white;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color: transparent;
+    text-color: #e06c75;
+}
+
+element normal.active,
+element alternate.active {
+    background-color: transparent;
+    text-color: @void-green-lt;
+}
+
+element selected.normal {
+    background-color: @void-green;
+    text-color: @void-white;
+}
+
+element selected.urgent {
+    background-color: #e06c75;
+    text-color: @void-white;
+}
+
+element selected.active {
+    background-color: @void-green-lt;
+    text-color: @void-charcoal;
+}
+
+element-icon {
+    size: 22px;
+    padding: 0 8px 0 0;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
