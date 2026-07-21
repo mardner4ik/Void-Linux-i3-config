@@ -1,0 +1,59 @@
+general {
+        colors = true
+        interval = 1
+        color_good  = "#a9d5b6"
+        color_degraded = "#e5c07b"
+        color_bad = "#e06c75"
+}
+
+# _first_ automatically finds the first available Wi-Fi / Ethernet interface,
+# so this config works the same on any laptop or PC without editing device names.
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery all"
+order += "disk /"
+order += "memory"
+order += "load"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "📶 %essid (%quality)"
+        format_down = "📶 Wi-Fi off"
+}
+
+ethernet _first_ {
+        format_up = "🌐 %ip"
+        format_down = "🌐 cable unplugged"
+}
+
+# Shows charge for any battery found (BAT0, BAT1...).
+# On desktops without a battery, this block simply doesn't show up.
+battery all {
+        format = "%status %percentage"
+        format_down = ""
+        status_chr = "⚡"
+        status_bat = "🔋"
+        status_full = "🔋 Full"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 15
+        threshold_type = "percentage"
+        integer_battery_capacity = true
+}
+
+disk "/" {
+        format = "💾 %avail"
+}
+
+memory {
+        format = "🧠 %used / %total"
+        threshold_degraded = "10%"
+        threshold_critical = "5%"
+}
+
+load {
+        format = "⚙ %1min"
+}
+
+tztime local {
+        format = "🕒 %H:%M   📅 %d.%m.%Y"
+}

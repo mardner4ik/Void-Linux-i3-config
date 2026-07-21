@@ -1,0 +1,54 @@
+[global]
+    monitor = 0
+    follow = mouse
+    origin = top-right
+    offset = 12x40
+    width = 320
+    height = 300
+    scale = 0
+    notification_limit = 5
+
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_corner_radius = 4
+
+    indicate_hidden = yes
+    transparency = 8
+    separator_height = 2
+    padding = 12
+    horizontal_padding = 14
+    frame_width = 2
+    frame_color = "#478061"
+    separator_color = frame
+    corner_radius = 8
+
+    font = DejaVu Sans Mono 10
+    format = "<b>%s</b>\n%b"
+    word_wrap = yes
+    ellipsize = middle
+
+    icon_position = left
+    max_icon_size = 40
+
+    mouse_left_click = close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "#1b1d1f"
+    foreground = "#a9b1bc"
+    frame_color = "#478061"
+    timeout = 4
+
+[urgency_normal]
+    background = "#1b1d1f"
+    foreground = "#ffffff"
+    frame_color = "#478061"
+    timeout = 6
+
+[urgency_critical]
+    background = "#1b1d1f"
+    foreground = "#ffffff"
+    frame_color = "#e06c75"
+    timeout = 0
